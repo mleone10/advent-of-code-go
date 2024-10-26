@@ -1,8 +1,8 @@
 package grid
 
 import (
-	"github.com/mleone10/advent-of-code-2022/pkg/array"
-	"github.com/mleone10/advent-of-code-2022/pkg/maputil"
+	"github.com/mleone10/advent-of-code-go/years/2022/pkg/array"
+	"github.com/mleone10/advent-of-code-go/years/2022/pkg/maputil"
 )
 
 type item interface {

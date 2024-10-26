@@ -3,8 +3,8 @@ package queue_test
 import (
 	"testing"
 
-	"github.com/mleone10/advent-of-code-2022/pkg/assert"
-	"github.com/mleone10/advent-of-code-2022/pkg/queue"
+	"github.com/mleone10/advent-of-code-go/years/2022/pkg/assert"
+	"github.com/mleone10/advent-of-code-go/years/2022/pkg/queue"
 )
 
 func TestNewQueue(t *testing.T) {

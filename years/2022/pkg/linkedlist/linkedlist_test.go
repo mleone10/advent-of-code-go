@@ -3,8 +3,8 @@ package linkedlist_test
 import (
 	"testing"
 
-	"github.com/mleone10/advent-of-code-2022/pkg/assert"
-	"github.com/mleone10/advent-of-code-2022/pkg/linkedlist"
+	"github.com/mleone10/advent-of-code-go/years/2022/pkg/assert"
+	"github.com/mleone10/advent-of-code-go/years/2022/pkg/linkedlist"
 )
 
 func TestNewNode(t *testing.T) {

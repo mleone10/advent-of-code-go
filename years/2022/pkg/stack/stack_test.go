@@ -3,8 +3,8 @@ package stack_test
 import (
 	"testing"
 
-	"github.com/mleone10/advent-of-code-2022/pkg/assert"
-	"github.com/mleone10/advent-of-code-2022/pkg/stack"
+	"github.com/mleone10/advent-of-code-go/years/2022/pkg/assert"
+	"github.com/mleone10/advent-of-code-go/years/2022/pkg/stack"
 )
 
 func TestNew(t *testing.T) {
