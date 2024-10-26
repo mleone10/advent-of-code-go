@@ -1,1 +1,0 @@
-package newday_test
