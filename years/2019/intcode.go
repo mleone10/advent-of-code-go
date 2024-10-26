@@ -13,11 +13,6 @@ type Program struct {
 	Output      chan<- int
 }
 
-type operation struct {
-	code  int
-	modes [3]bool
-}
-
 // NewProgram accepts an initial state and returns a ready-to-run Program, as well as input and output channels for the caller to utilize.
 func NewProgram(i []int) (*Program, chan<- int, <-chan int) {
 	init, state := map[int]int{}, map[int]int{}
