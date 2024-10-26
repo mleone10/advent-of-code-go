@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	aoc "github.com/mleone10/advent-of-code-2019"
+	aoc "github.com/mleone10/advent-of-code-go/years/2019"
 )
 
 const (

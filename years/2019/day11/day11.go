@@ -1,4 +1,4 @@
-package main
+package day11
 
 import (
 	"bufio"
@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	aoc "github.com/mleone10/advent-of-code-2019"
+	aoc "github.com/mleone10/advent-of-code-go/years/2019"
 )
 
 const (
