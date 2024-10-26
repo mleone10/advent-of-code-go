@@ -7,7 +7,7 @@ import (
 	"sort"
 	"strings"
 
-	aoc "github.com/mleone10/advent-of-code-go/years/2020"
+	"github.com/mleone10/advent-of-code-go/internal/mth"
 )
 
 func main() {
@@ -23,7 +23,7 @@ func main() {
 }
 
 func calcMaxSeatID(ps []string) int {
-	return aoc.IntSliceMax(calcSeatIDs(ps))
+	return mth.Max(calcSeatIDs(ps)...)
 }
 
 func calcMySeatID(ps []string) int {
@@ -60,7 +60,7 @@ func calcSeatID(p string) int {
 }
 
 func calcRow(p string) int {
-	rs := aoc.InitIntSlice(0, 127)
+	rs := initIntSlice(0, 127)
 
 	for _, c := range p {
 		switch string(c) {
@@ -75,7 +75,7 @@ func calcRow(p string) int {
 }
 
 func calcCol(p string) int {
-	rs := aoc.InitIntSlice(0, 7)
+	rs := initIntSlice(0, 7)
 
 	for _, c := range p {
 		switch string(c) {
@@ -87,4 +87,14 @@ func calcCol(p string) int {
 	}
 
 	return rs[0]
+}
+
+func initIntSlice(min, max int) []int {
+	ints := []int{}
+
+	for i := min; i <= max; i++ {
+		ints = append(ints, i)
+	}
+
+	return ints
 }

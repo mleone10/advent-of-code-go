@@ -6,7 +6,7 @@ import (
 	"os"
 	"strconv"
 
-	aoc "github.com/mleone10/advent-of-code-go/years/2020"
+	"github.com/mleone10/advent-of-code-go/internal/mth"
 )
 
 type action string
@@ -76,7 +76,7 @@ func main() {
 	}
 
 	log.Printf("Normal ship manhattan distance from origin: %d", s.loc.x+s.loc.y)
-	log.Printf("Wayship manhattan distance from origin: %d", aoc.Abs(ws.s.loc.x)+aoc.Abs(ws.s.loc.y))
+	log.Printf("Wayship manhattan distance from origin: %d", mth.Abs(ws.s.loc.x)+mth.Abs(ws.s.loc.y))
 }
 
 func (s *ship) apply(a action, v value) {

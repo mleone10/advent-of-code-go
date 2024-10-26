@@ -3,11 +3,12 @@ package main
 import (
 	"bufio"
 	"log"
+	"math"
 	"os"
 	"sort"
 	"strconv"
 
-	aoc "github.com/mleone10/advent-of-code-go/years/2020"
+	"github.com/mleone10/advent-of-code-go/internal/mth"
 )
 
 const preambleLen = 25
@@ -40,7 +41,7 @@ func findFirstInvalidNumber(ints []int) int {
 
 func findEncryptionWeakness(target int, ints []int) int {
 	subInts := findSubInts(target, ints)
-	return aoc.IntSliceMin(subInts) + aoc.IntSliceMax(subInts)
+	return intSliceMin(subInts) + mth.Max(subInts...)
 }
 
 func isValidTwoSum(target int, ints []int) bool {
@@ -62,11 +63,27 @@ func isValidTwoSum(target int, ints []int) bool {
 func findSubInts(target int, ints []int) []int {
 	for i := range ints {
 		for j := range ints[i:] {
-			if aoc.IntSliceSum(ints[i:i+j]) == target {
+			if intSliceSum(ints[i:i+j]) == target {
 				return ints[i : i+j]
 			}
 		}
 	}
 	log.Fatal("No valid sub-slice found")
 	return []int{}
+}
+
+func intSliceSum(ints []int) int {
+	var sum int
+	for _, i := range ints {
+		sum += i
+	}
+	return sum
+}
+
+func intSliceMin(ints []int) int {
+	min := math.MaxInt64
+	for _, i := range ints {
+		min = mth.Min(i, min)
+	}
+	return min
 }

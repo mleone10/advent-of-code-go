@@ -2,6 +2,8 @@ package aoc
 
 import (
 	"fmt"
+
+	"github.com/mleone10/advent-of-code-go/internal/mth"
 )
 
 // Coordinate represents a two-dimensional (x,y) position on the grid.
@@ -52,10 +54,10 @@ func (g *Grid) Set(c Coordinate, v fmt.Stringer) {
 	}
 
 	g.Points[c] = v
-	g.minX = Min(g.minX, c.X)
-	g.minY = Min(g.minY, c.Y)
-	g.maxX = Max(g.maxX, c.X)
-	g.maxY = Max(g.maxY, c.Y)
+	g.minX = mth.Min(g.minX, c.X)
+	g.minY = mth.Min(g.minY, c.Y)
+	g.maxX = mth.Max(g.maxX, c.X)
+	g.maxY = mth.Max(g.maxY, c.Y)
 }
 
 // Print displays the entire grid to STDOUT using the grid's designated MapperFunc
@@ -72,7 +74,7 @@ func (g Grid) Print() {
 	}
 
 	for l, c := range g.Points {
-		output[l.Y+Abs(g.minY)][l.X+Abs(g.minX)] = c.String()
+		output[l.Y+mth.Abs(g.minY)][l.X+mth.Abs(g.minX)] = c.String()
 	}
 
 	for i := range output {
