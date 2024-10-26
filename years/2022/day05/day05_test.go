@@ -5,9 +5,9 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/mleone10/advent-of-code-go/internal/stack"
 	"github.com/mleone10/advent-of-code-go/years/2022/day05"
 	"github.com/mleone10/advent-of-code-go/years/2022/pkg/assert"
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/stack"
 )
 
 //go:embed test_input.txt

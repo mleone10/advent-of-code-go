@@ -3,9 +3,9 @@ package day12
 import (
 	"strings"
 
+	"github.com/mleone10/advent-of-code-go/internal/queue"
 	"github.com/mleone10/advent-of-code-go/years/2022/pkg/array"
 	"github.com/mleone10/advent-of-code-go/years/2022/pkg/grid"
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/queue"
 )
 
 type Terrain struct {

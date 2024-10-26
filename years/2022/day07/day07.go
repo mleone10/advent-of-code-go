@@ -5,8 +5,8 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/mleone10/advent-of-code-go/internal/mp"
 	"github.com/mleone10/advent-of-code-go/years/2022/pkg/array"
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/maputil"
 )
 
 type FileSystem struct {
@@ -85,7 +85,7 @@ func (d FileSystem) DirectorySizes() map[string]int {
 }
 
 func (d FileSystem) UsedSpace() int {
-	return array.Reduce(maputil.Values(d.fs), func(sum int, filesize int) int {
+	return array.Reduce(mp.Values(d.fs), func(sum int, filesize int) int {
 		return sum + filesize
 	}, 0)
 }

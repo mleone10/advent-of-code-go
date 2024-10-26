@@ -4,10 +4,10 @@ import (
 	_ "embed"
 	"testing"
 
+	"github.com/mleone10/advent-of-code-go/internal/mp"
 	"github.com/mleone10/advent-of-code-go/years/2022/day08"
 	"github.com/mleone10/advent-of-code-go/years/2022/pkg/array"
 	"github.com/mleone10/advent-of-code-go/years/2022/pkg/assert"
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/maputil"
 )
 
 //go:embed test_input.txt
@@ -67,7 +67,7 @@ func TestSolvePartOne(t *testing.T) {
 		g := day08.NewGrid(tc.input)
 		v := 0
 		for i, row := range g.Sparse() {
-			v += len(array.Filter(maputil.Keys(row), func(j int) bool { return day08.IsVisible(g, j, i) }))
+			v += len(array.Filter(mp.Keys(row), func(j int) bool { return day08.IsVisible(g, j, i) }))
 		}
 		assert.Equal(t, v, tc.expectedPartOne)
 	}

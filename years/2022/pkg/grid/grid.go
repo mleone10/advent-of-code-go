@@ -1,8 +1,8 @@
 package grid
 
 import (
+	"github.com/mleone10/advent-of-code-go/internal/mp"
 	"github.com/mleone10/advent-of-code-go/years/2022/pkg/array"
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/maputil"
 )
 
 type item interface {
@@ -57,8 +57,8 @@ func (p Plane[T]) All() [][]T {
 
 func (p *Plane[T]) Width() int {
 	if p.width == 0 {
-		p.width = array.Max(array.Map(maputil.Values(p.grid), func(row map[int]T) int {
-			return array.Max(maputil.Keys(row))
+		p.width = array.Max(array.Map(mp.Values(p.grid), func(row map[int]T) int {
+			return array.Max(mp.Keys(row))
 		})) + 1
 	}
 	return p.width
@@ -66,7 +66,7 @@ func (p *Plane[T]) Width() int {
 
 func (p *Plane[T]) Height() int {
 	if p.height == 0 {
-		p.height = array.Max(maputil.Keys(p.grid)) + 1
+		p.height = array.Max(mp.Keys(p.grid)) + 1
 	}
 	return p.height
 }

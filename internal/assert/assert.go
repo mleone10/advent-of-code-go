@@ -36,6 +36,13 @@ func Equals[T comparable](t *testing.T, expected, actual T) {
 	}
 }
 
+// Equals tests whether two comparable values are not equal.
+func NotEquals[T comparable](t *testing.T, expected, actual T) {
+	if expected == actual {
+		t.Errorf("expected variables to be different, but both were [%v]", actual)
+	}
+}
+
 // MapEquals tests whether two maps of comparable types are equal as determined by their having equal lengths, identical key sets, and identical values for each key in those sets.
 func MapEquals[M ~map[K]V, K, V comparable](t *testing.T, expected, actual M) {
 	if len(expected) != len(actual) {

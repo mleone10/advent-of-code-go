@@ -3,26 +3,26 @@ package queue_test
 import (
 	"testing"
 
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/assert"
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/queue"
+	"github.com/mleone10/advent-of-code-go/internal/assert"
+	"github.com/mleone10/advent-of-code-go/internal/queue"
 )
 
 func TestNewQueue(t *testing.T) {
 	var q queue.Queue[int]
-	assert.Equal(t, q.Length(), 0)
+	assert.Equals(t, q.Length(), 0)
 }
 
 func TestPush(t *testing.T) {
 	var q queue.Queue[int]
 	q.Push(1)
 	q.Push(2)
-	assert.Equal(t, q.Length(), 2)
+	assert.Equals(t, q.Length(), 2)
 }
 
 func TestPop(t *testing.T) {
 	var q queue.Queue[int]
 	q.Push(1)
 	q.Push(2)
-	assert.Equal(t, q.Pop(), 1)
-	assert.Equal(t, q.Pop(), 2)
+	assert.Equals(t, q.Pop(), 1)
+	assert.Equals(t, q.Pop(), 2)
 }

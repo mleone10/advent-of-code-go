@@ -4,10 +4,10 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/mleone10/advent-of-code-go/internal/linkedlist"
+	"github.com/mleone10/advent-of-code-go/internal/mp"
+	"github.com/mleone10/advent-of-code-go/internal/mth"
 	"github.com/mleone10/advent-of-code-go/years/2022/pkg/grid"
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/linkedlist"
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/maputil"
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/mathutil"
 )
 
 type Dir grid.Point
@@ -71,8 +71,8 @@ func updateKnot(k *linkedlist.Node[*Knot]) {
 	var moved bool
 	dx := k.Prev().Value().Pos.X - k.Value().Pos.X
 	dy := k.Prev().Value().Pos.Y - k.Value().Pos.Y
-	adx := mathutil.Abs(dx)
-	ady := mathutil.Abs(dy)
+	adx := mth.Abs(dx)
+	ady := mth.Abs(dy)
 
 	if adx > 1 && ady > 1 {
 		k.Value().Pos.X += (dx / adx)
@@ -108,5 +108,5 @@ func (k *Knot) Visit() {
 }
 
 func (k Knot) Visited() []grid.Point {
-	return maputil.Keys(k.visited)
+	return mp.Keys(k.visited)
 }

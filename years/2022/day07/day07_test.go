@@ -5,10 +5,10 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/mleone10/advent-of-code-go/internal/mp"
 	"github.com/mleone10/advent-of-code-go/years/2022/day07"
 	"github.com/mleone10/advent-of-code-go/years/2022/pkg/array"
 	"github.com/mleone10/advent-of-code-go/years/2022/pkg/assert"
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/maputil"
 )
 
 //go:embed test_input.txt
@@ -84,6 +84,6 @@ func TestSolvePartTwo(t *testing.T) {
 				candidates[dir] = size
 			}
 		}
-		assert.Equal(t, array.Min(maputil.Values(candidates)), tc.expectedPartTwo)
+		assert.Equal(t, array.Min(mp.Values(candidates)), tc.expectedPartTwo)
 	}
 }

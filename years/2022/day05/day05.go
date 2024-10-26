@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/stack"
+	"github.com/mleone10/advent-of-code-go/internal/stack"
 )
 
 type Day05 []stack.Stack[string]
