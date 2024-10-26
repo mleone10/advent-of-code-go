@@ -7,6 +7,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/mleone10/advent-of-code-go/internal/mth"
 	aoc "github.com/mleone10/advent-of-code-go/years/2019"
 )
 
@@ -134,7 +135,7 @@ func findShortestPath(from, to aoc.Coordinate, maze aoc.Grid) int {
 func findTimeToFill(from aoc.Coordinate, maze aoc.Grid) int {
 	max := 0
 	for _, t := range calculateDistancesFrom(from, maze) {
-		max = aoc.Max(max, t)
+		max = mth.Max(max, t)
 	}
 	return max
 }

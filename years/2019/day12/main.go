@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	aoc "github.com/mleone10/advent-of-code-go/years/2019"
+	"github.com/mleone10/advent-of-code-go/internal/mth"
 )
 
 const (
@@ -95,7 +95,7 @@ func (s *system) getPeriod() int {
 		periods[i]++
 	}
 
-	return aoc.Lcm(aoc.Lcm(periods[0], periods[1]), periods[2])
+	return mth.Lcm(mth.Lcm(periods[0], periods[1]), periods[2])
 }
 
 func (s *system) applyGravity() {
@@ -175,5 +175,5 @@ func (v *vector) add(r vector) {
 }
 
 func (v *vector) sum() int {
-	return aoc.Abs(v.x) + aoc.Abs(v.y) + aoc.Abs(v.z)
+	return mth.Abs(v.x) + mth.Abs(v.y) + mth.Abs(v.z)
 }

@@ -3,6 +3,8 @@ package aoc
 import (
 	"fmt"
 	"strconv"
+
+	"github.com/mleone10/advent-of-code-go/internal/mth"
 )
 
 // MappingFunc represents a function used to determine which character Print should use for a given integer in the grid.
@@ -32,10 +34,10 @@ func (g *Grid) Set(x, y, i int) {
 	}
 
 	g.Field[Coordinate{x, y}] = i
-	g.minX = Min(g.minX, x)
-	g.minY = Min(g.minY, y)
-	g.maxX = Max(g.maxX, x)
-	g.maxY = Max(g.maxY, y)
+	g.minX = mth.Min(g.minX, x)
+	g.minY = mth.Min(g.minY, y)
+	g.maxX = mth.Max(g.maxX, x)
+	g.maxY = mth.Max(g.maxY, y)
 }
 
 // SetCoord is a convenience method which uses a given Coordinate's (x, y) location to call Set
@@ -76,7 +78,7 @@ func (g Grid) Print() {
 	}
 
 	for l, c := range g.Field {
-		output[l.Y+Abs(g.minY)][l.X+Abs(g.minX)] = g.Mapper(c)
+		output[l.Y+mth.Abs(g.minY)][l.X+mth.Abs(g.minX)] = g.Mapper(c)
 	}
 
 	for i := range output {

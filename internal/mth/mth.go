@@ -72,3 +72,8 @@ func Lcm(ns ...int) int {
 
 	return res
 }
+
+// Ceil returns the rounded-up value of x
+func Ceil(x float64) int {
+	return int(math.Ceil(x))
+}

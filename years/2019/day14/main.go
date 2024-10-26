@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	aoc "github.com/mleone10/advent-of-code-go/years/2019"
+	"github.com/mleone10/advent-of-code-go/internal/mth"
 )
 
 const (
@@ -60,7 +60,7 @@ func (cs chemicals) simplify(c string, y int, r requirements) int {
 		r[c] = 0
 	}
 
-	batches := aoc.Ceil(float64(y) / float64(cs[c].yield))
+	batches := mth.Ceil(float64(y) / float64(cs[c].yield))
 	oreSum := 0
 	for k, amt := range cs[c].components {
 		oreSum += cs.simplify(k, amt*batches, r)
