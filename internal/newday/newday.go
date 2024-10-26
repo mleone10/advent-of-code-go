@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strconv"
 	"text/template"
 )
 
@@ -21,13 +22,13 @@ type templateValues struct {
 	DayNum int
 }
 
-func Init(basePath string, dayNum int) error {
+func Init(basePath string, yearNum int, dayNum int) error {
 	dayName := fmt.Sprintf("day%02d", dayNum)
-	dayDirPath := filepath.Join(basePath, dayName)
+	dayDirPath := filepath.Join(basePath, "years", strconv.Itoa(yearNum), dayName)
 
-	err := os.Mkdir(dayDirPath, 0755)
+	err := os.MkdirAll(dayDirPath, 0755)
 	if err != nil {
-		return fmt.Errorf("failed to create directory at %v: %w", dayDirPath, err)
+		return fmt.Errorf("failed to create directory: %w", err)
 	}
 
 	tvs := templateValues{DayNum: dayNum}
@@ -73,8 +74,4 @@ func createFile(path string) (*os.File, error) {
 		return nil, fmt.Errorf("failed to create empty file: %w", err)
 	}
 	return file, nil
-}
-
-func dayNameString(dayNum int) string {
-	return fmt.Sprintf("day%02d", dayNum)
 }
