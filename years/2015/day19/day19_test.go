@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/mleone10/advent-of-code-go/internal/assert"
-	day19 "github.com/mleone10/advent-of-code-go/years/2023/2015day19"
+	"github.com/mleone10/advent-of-code-go/years/2015/day19"
 )
 
 //go:embed test_input.txt

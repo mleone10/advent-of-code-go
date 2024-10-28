@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/mleone10/advent-of-code-go/internal/assert"
-	day20 "github.com/mleone10/advent-of-code-go/years/2023/2015day20"
+	"github.com/mleone10/advent-of-code-go/years/2015/day20"
 )
 
 var tcs = []struct {
