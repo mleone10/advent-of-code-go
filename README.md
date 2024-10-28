@@ -4,7 +4,7 @@
 # Usage
 Starter directories for each puzzle can be generated with the included `newday` program.
 
-```bash
+```
 $ ./bin/newday -h
 Usage of ./bin/newday:
   -day int
@@ -20,7 +20,7 @@ $ ./bin/newday -year 2015 -day 1
 
 The included `Makefile` can be used to quickly execute all puzzle tests.
 
-```bash
+```
 # The default target both executes all tests and builds the newday program.
 $ make
 ```
