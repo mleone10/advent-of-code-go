@@ -3,7 +3,7 @@ package day03
 import (
 	"strings"
 
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/array"
+	"github.com/mleone10/advent-of-code-go/internal/slice"
 )
 
 type Day03 struct {
@@ -22,7 +22,7 @@ func FindCommonContents(compartments []string) string {
 	var newCommon []rune
 	for _, comp := range compartments[1:] {
 		for _, char := range comp {
-			if array.Contains([]rune(common), char) {
+			if slice.Contains([]rune(common), char) {
 				newCommon = append(newCommon, char)
 			}
 		}

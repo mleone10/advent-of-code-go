@@ -5,8 +5,8 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/mleone10/advent-of-code-go/internal/assert"
 	"github.com/mleone10/advent-of-code-go/years/2022/day10"
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/assert"
 )
 
 //go:embed test_input.txt
@@ -40,14 +40,14 @@ var tcs = []struct {
 
 func TestLoadProgram(t *testing.T) {
 	cs := day10.LoadProgram([]string{"noop", "addx 3", "addx -5"})
-	assert.ArraysEqual(t, cs.Cycles(), []int{1, 1, 1, 4, 4})
-	assert.Equal(t, cs.RegisterX(), -1)
+	assert.ArrayEquals(t, cs.Cycles(), []int{1, 1, 1, 4, 4})
+	assert.Equals(t, cs.RegisterX(), -1)
 }
 
 func TestSolvePartOne(t *testing.T) {
 	for _, tc := range tcs {
 		cs := day10.LoadProgram(strings.Split(strings.TrimSpace(tc.input), "\n"))
-		assert.Equal(t, partOneProductSignalStrength(cs), tc.expectedPartOne)
+		assert.Equals(t, partOneProductSignalStrength(cs), tc.expectedPartOne)
 	}
 }
 
@@ -63,6 +63,6 @@ func partOneProductSignalStrength(cs day10.CommSystem) int {
 func TestSolvePartTwo(t *testing.T) {
 	for _, tc := range tcs {
 		cs := day10.LoadProgram(strings.Split(strings.TrimSpace(tc.input), "\n"))
-		assert.Equal(t, cs.Render(), strings.TrimSpace(tc.expectedPartTwo))
+		assert.Equals(t, cs.Render(), strings.TrimSpace(tc.expectedPartTwo))
 	}
 }

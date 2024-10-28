@@ -3,7 +3,7 @@ package day02
 import (
 	"testing"
 
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/assert"
+	"github.com/mleone10/advent-of-code-go/internal/assert"
 )
 
 func TestParseInput(t *testing.T) {
@@ -11,7 +11,7 @@ func TestParseInput(t *testing.T) {
 		`A Y
 			B X
 			C Z`)
-	assert.Equal(t, len(d.rounds), 3)
+	assert.Equals(t, len(d.rounds), 3)
 }
 
 func TestSimulateRound(t *testing.T) {
@@ -25,6 +25,6 @@ func TestSimulateRound(t *testing.T) {
 	}
 
 	for _, tc := range tcs {
-		assert.Equal(t, simulateRound(tc.round), tc.expectedScore)
+		assert.Equals(t, simulateRound(tc.round), tc.expectedScore)
 	}
 }

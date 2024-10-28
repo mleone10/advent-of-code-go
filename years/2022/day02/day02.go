@@ -3,7 +3,7 @@ package day02
 import (
 	"strings"
 
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/array"
+	"github.com/mleone10/advent-of-code-go/internal/slice"
 )
 
 type Day02 struct {
@@ -68,15 +68,15 @@ func New(input string) Day02 {
 }
 
 func (d Day02) SolvePartOne() int {
-	return array.Reduce(d.rounds, func(s int, r round) int {
+	return slice.Reduce(d.rounds, 0, func(r round, s int) int {
 		return s + simulateRound(r)
-	}, 0)
+	})
 }
 
 func (d Day02) SolvePartTwo() int {
-	return array.Reduce(d.rounds, func(s int, r round) int {
+	return slice.Reduce(d.rounds, 0, func(r round, s int) int {
 		return s + simulateRound(round{r.oppMove, myMoveAi[r.oppMove][r.myMove]})
-	}, 0)
+	})
 }
 
 func simulateRound(r round) int {

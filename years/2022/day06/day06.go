@@ -3,7 +3,7 @@ package day06
 import (
 	"strings"
 
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/array"
+	"github.com/mleone10/advent-of-code-go/internal/slice"
 )
 
 var FindStartOfPacket = findFirstNUnique(4)
@@ -21,5 +21,5 @@ func findFirstNUnique(n int) func(string) int {
 }
 
 func allUnique(arr string) bool {
-	return len(array.FrequencyList(strings.Split(arr, ""))) == len(arr)
+	return len(slice.FrequencyList(strings.Split(arr, ""))) == len(arr)
 }

@@ -1,9 +1,13 @@
 package slice
 
-import "strings"
+import (
+	"strings"
+
+	"golang.org/x/exp/constraints"
+)
 
 type summable interface {
-	int
+	constraints.Float | constraints.Integer
 }
 
 // Map applies a function `f` to each element in a slice `arr`, returning a new slice of the results of `f`.
@@ -65,4 +69,24 @@ func Reverse[S comparable](arr []S) []S {
 		ret = append(ret, arr[i])
 	}
 	return ret
+}
+
+// Take returns the first n elements of the given slice.
+func Take[T any](arr []T, n int) []T {
+	if len(arr) <= n {
+		return arr
+	}
+
+	return arr[:n]
+}
+
+// FrequencyList accepts a slice of comparable-type values and returns a map[T]int representing how many times each key appears in the input slice.
+func FrequencyList[T comparable](args []T) map[T]int {
+	freqs := map[T]int{}
+
+	for _, arg := range args {
+		freqs[arg] += 1
+	}
+
+	return freqs
 }

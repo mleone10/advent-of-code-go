@@ -5,9 +5,9 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/mleone10/advent-of-code-go/internal/assert"
+	"github.com/mleone10/advent-of-code-go/internal/slice"
 	"github.com/mleone10/advent-of-code-go/years/2022/day04"
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/array"
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/assert"
 )
 
 //go:embed test_input.txt
@@ -45,29 +45,29 @@ var tcs = []struct {
 
 func TestParseInput(t *testing.T) {
 	d := day04.New("1-5,6-10")
-	assert.Equal(t, d.R1.Start, 1)
-	assert.Equal(t, d.R1.End, 5)
-	assert.Equal(t, d.R2.Start, 6)
-	assert.Equal(t, d.R2.End, 10)
+	assert.Equals(t, d.R1.Start, 1)
+	assert.Equals(t, d.R1.End, 5)
+	assert.Equals(t, d.R2.Start, 6)
+	assert.Equals(t, d.R2.End, 10)
 }
 
 func TestSolvePartOne(t *testing.T) {
 	for _, tc := range tcs {
-		numOverlapping := array.Reduce(strings.Split(strings.TrimSpace(tc.input), "\n"), func(sum int, line string) int {
+		numOverlapping := slice.Reduce(strings.Split(strings.TrimSpace(tc.input), "\n"), 0, func(line string, sum int) int {
 			rgs := day04.New(line)
 			// If R2 is within the span of R1 or R1 is within the span of R2, count this range pair.
 			if (rgs.R2.Start >= rgs.R1.Start && rgs.R2.End <= rgs.R1.End) || (rgs.R1.Start >= rgs.R2.Start && rgs.R1.End <= rgs.R2.End) {
 				return sum + 1
 			}
 			return sum
-		}, 0)
-		assert.Equal(t, numOverlapping, tc.expectedPartOne)
+		})
+		assert.Equals(t, numOverlapping, tc.expectedPartOne)
 	}
 }
 
 func TestSolvePartTwo(t *testing.T) {
 	for _, tc := range tcs {
-		numOverlapping := array.Reduce(strings.Split(strings.TrimSpace(tc.input), "\n"), func(sum int, line string) int {
+		numOverlapping := slice.Reduce(strings.Split(strings.TrimSpace(tc.input), "\n"), 0, func(line string, sum int) int {
 			rgs := day04.New(line)
 			for i := rgs.R1.Start; i <= rgs.R1.End; i++ {
 				if i >= rgs.R2.Start && i <= rgs.R2.End {
@@ -75,7 +75,7 @@ func TestSolvePartTwo(t *testing.T) {
 				}
 			}
 			return sum
-		}, 0)
-		assert.Equal(t, numOverlapping, tc.expectedPartTwo)
+		})
+		assert.Equals(t, numOverlapping, tc.expectedPartTwo)
 	}
 }

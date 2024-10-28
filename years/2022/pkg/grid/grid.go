@@ -2,11 +2,17 @@ package grid
 
 import (
 	"github.com/mleone10/advent-of-code-go/internal/mp"
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/array"
+	"github.com/mleone10/advent-of-code-go/internal/mth"
+	"github.com/mleone10/advent-of-code-go/internal/slice"
 )
 
 type item interface {
 	any
+}
+
+type Point struct {
+	X int
+	Y int
 }
 
 type Plane[T item] struct {
@@ -57,16 +63,16 @@ func (p Plane[T]) All() [][]T {
 
 func (p *Plane[T]) Width() int {
 	if p.width == 0 {
-		p.width = array.Max(array.Map(mp.Values(p.grid), func(row map[int]T) int {
-			return array.Max(mp.Keys(row))
-		})) + 1
+		p.width = mth.Max(slice.Map(mp.Values(p.grid), func(row map[int]T) int {
+			return mth.Max(mp.Keys(row)...)
+		})...) + 1
 	}
 	return p.width
 }
 
 func (p *Plane[T]) Height() int {
 	if p.height == 0 {
-		p.height = array.Max(mp.Keys(p.grid)) + 1
+		p.height = mth.Max(mp.Keys(p.grid)...) + 1
 	}
 	return p.height
 }

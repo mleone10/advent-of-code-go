@@ -4,7 +4,7 @@ import (
 	"strings"
 
 	"github.com/mleone10/advent-of-code-go/internal/queue"
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/array"
+	"github.com/mleone10/advent-of-code-go/internal/slice"
 	"github.com/mleone10/advent-of-code-go/years/2022/pkg/grid"
 )
 
@@ -58,7 +58,7 @@ func (t Terrain) ValidNeighbors(p grid.Point, path []grid.Point) []grid.Point {
 
 	for _, delta := range []grid.Point{{X: 0, Y: -1}, {X: 0, Y: 1}, {X: -1, Y: 0}, {X: 1, Y: 0}} {
 		candidate := grid.Point{X: p.X + delta.X, Y: p.Y + delta.Y}
-		if t.Has(candidate.X, candidate.Y) && !array.Contains(path, candidate) {
+		if t.Has(candidate.X, candidate.Y) && !slice.Contains(path, candidate) {
 			candidateHeight := t.Get(candidate.X, candidate.Y)
 			currentHeight := t.Get(p.X, p.Y)
 			if candidateHeight <= currentHeight+1 {

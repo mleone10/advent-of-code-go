@@ -4,9 +4,9 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/mleone10/advent-of-code-go/internal/assert"
+	"github.com/mleone10/advent-of-code-go/internal/slice"
 	"github.com/mleone10/advent-of-code-go/years/2022/day03"
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/array"
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/assert"
 )
 
 var tcs = []struct {
@@ -29,30 +29,30 @@ var tcs = []struct {
 func TestSplitContents(t *testing.T) {
 	compartments := day03.GroupCompartments("vJrwpWtwJgWrhcsFMMfFFhFp")
 
-	assert.Equal(t, compartments[0], "vJrwpWtwJgWr")
-	assert.Equal(t, compartments[1], "hcsFMMfFFhFp")
+	assert.Equals(t, compartments[0], "vJrwpWtwJgWr")
+	assert.Equals(t, compartments[1], "hcsFMMfFFhFp")
 }
 
 func TestFindCommonContents(t *testing.T) {
-	assert.Equal(t, day03.FindCommonContents([]string{"abc", "cde"}), "c")
-	assert.Equal(t, day03.FindCommonContents([]string{"vJrwpWtwJgWr", "hcsFMMfFFhFp"}), "p")
-	assert.Equal(t, day03.FindCommonContents([]string{"abcx", "cdex", "efgx"}), "x")
+	assert.Equals(t, day03.FindCommonContents([]string{"abc", "cde"}), "c")
+	assert.Equals(t, day03.FindCommonContents([]string{"vJrwpWtwJgWr", "hcsFMMfFFhFp"}), "p")
+	assert.Equals(t, day03.FindCommonContents([]string{"abcx", "cdex", "efgx"}), "x")
 }
 
 func TestCalculatePriority(t *testing.T) {
-	assert.Equal(t, day03.CalculatePriority('p'), 16)
-	assert.Equal(t, day03.CalculatePriority('L'), 38)
-	assert.Equal(t, day03.CalculatePriority('P'), 42)
-	assert.Equal(t, day03.CalculatePriority('v'), 22)
+	assert.Equals(t, day03.CalculatePriority('p'), 16)
+	assert.Equals(t, day03.CalculatePriority('L'), 38)
+	assert.Equals(t, day03.CalculatePriority('P'), 42)
+	assert.Equals(t, day03.CalculatePriority('v'), 22)
 }
 
 func TestSolvePartOne(t *testing.T) {
 	for _, tc := range tcs {
 		// For part one, we need to calculate a priority for each line and aggregate them into one sum.  Good opportunity for Reduce.
-		sumPriorities := array.Reduce(strings.Split(tc.input, "\n"), func(sum int, line string) int {
+		sumPriorities := slice.Reduce(strings.Split(tc.input, "\n"), 0, func(line string, sum int) int {
 			return sum + day03.CalculatePriority(day03.FindCommonContents(day03.GroupCompartments(line))[0])
-		}, 0)
-		assert.Equal(t, sumPriorities, tc.expectedPartOne)
+		})
+		assert.Equals(t, sumPriorities, tc.expectedPartOne)
 	}
 }
 
@@ -64,7 +64,7 @@ func TestSolvePartTwo(t *testing.T) {
 		for i := 0; i < len(sacks)/3; i++ {
 			sum += day03.CalculatePriority(day03.FindCommonContents([]string{sacks[i*3], sacks[i*3+1], sacks[i*3+2]})[0])
 		}
-		assert.Equal(t, sum, tc.expectedPartTwo)
+		assert.Equals(t, sum, tc.expectedPartTwo)
 	}
 }
 

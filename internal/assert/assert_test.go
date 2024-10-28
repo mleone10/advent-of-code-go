@@ -110,3 +110,21 @@ func TestMapEquals(t *testing.T) {
 		}
 	}
 }
+
+func TestContains(t *testing.T) {
+	testT := &testing.T{}
+	testArr := []int{0, 2, 4, 8}
+
+	assert.Contains(testT, testArr, 0)
+	assert.Contains(testT, testArr, 2)
+
+	if testT.Failed() {
+		t.Error()
+	}
+
+	assert.Contains(testT, testArr, 1)
+
+	if !testT.Failed() {
+		t.Error()
+	}
+}

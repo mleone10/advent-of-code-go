@@ -4,6 +4,7 @@ import (
 	"sort"
 	"testing"
 
+	"github.com/mleone10/advent-of-code-go/internal/slice"
 	"golang.org/x/exp/constraints"
 )
 
@@ -57,5 +58,12 @@ func MapEquals[M ~map[K]V, K, V comparable](t *testing.T, expected, actual M) {
 		} else {
 			t.Errorf("key [%v] not found", k)
 		}
+	}
+}
+
+// Contains asserts that a given array contains an expected value.
+func Contains[T comparable](t *testing.T, arr []T, val T) {
+	if !slice.Contains(arr, val) {
+		t.Errorf("value %+v not found in slice", val)
 	}
 }

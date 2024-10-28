@@ -5,10 +5,10 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/mleone10/advent-of-code-go/internal/assert"
 	"github.com/mleone10/advent-of-code-go/internal/mp"
+	"github.com/mleone10/advent-of-code-go/internal/mth"
 	"github.com/mleone10/advent-of-code-go/years/2022/day07"
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/array"
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/assert"
 )
 
 //go:embed test_input.txt
@@ -39,11 +39,11 @@ var tcs = []struct {
 func TestChangeDir(t *testing.T) {
 	d := day07.FileSystem{}
 	d.ChangeDir("/")
-	assert.Equal(t, d.Pwd(), "/")
+	assert.Equals(t, d.Pwd(), "/")
 	d.ChangeDir("a")
-	assert.Equal(t, d.Pwd(), "/a")
+	assert.Equals(t, d.Pwd(), "/a")
 	d.ChangeDir("..")
-	assert.Equal(t, d.Pwd(), "/")
+	assert.Equals(t, d.Pwd(), "/")
 }
 
 func TestDiscover(t *testing.T) {
@@ -58,7 +58,7 @@ func TestDiscover(t *testing.T) {
 
 func TestTotalUsedSpace(t *testing.T) {
 	d := day07.New(strings.Split(strings.TrimSpace(testInput), "\n"))
-	assert.Equal(t, d.UsedSpace(), 48381165)
+	assert.Equals(t, d.UsedSpace(), 48381165)
 }
 
 func TestSolvePartOne(t *testing.T) {
@@ -70,7 +70,7 @@ func TestSolvePartOne(t *testing.T) {
 				sum += size
 			}
 		}
-		assert.Equal(t, sum, tc.expectedPartOne)
+		assert.Equals(t, sum, tc.expectedPartOne)
 	}
 }
 
@@ -84,6 +84,6 @@ func TestSolvePartTwo(t *testing.T) {
 				candidates[dir] = size
 			}
 		}
-		assert.Equal(t, array.Min(mp.Values(candidates)), tc.expectedPartTwo)
+		assert.Equals(t, mth.Min(mp.Values(candidates)...), tc.expectedPartTwo)
 	}
 }

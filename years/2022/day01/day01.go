@@ -5,7 +5,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/array"
+	"github.com/mleone10/advent-of-code-go/internal/mth"
+	"github.com/mleone10/advent-of-code-go/internal/slice"
 )
 
 type Day1 struct {
@@ -28,7 +29,7 @@ func New(input string) Day1 {
 }
 
 func (d Day1) MaxCaloriesSingleElf() int {
-	return array.Max(d.reduceElves())
+	return mth.Max(d.reduceElves()...)
 }
 
 func (d Day1) CaloriesTopThreeElves() int {
@@ -36,13 +37,13 @@ func (d Day1) CaloriesTopThreeElves() int {
 
 	sort.Sort(sort.Reverse(sort.IntSlice(elfCalories)))
 
-	return array.Sum(array.Take(elfCalories, 3))
+	return slice.Sum(slice.Take(elfCalories, 3))
 }
 
 func (d Day1) reduceElves() []int {
 	elfCalories := []int{}
 	for _, elf := range d.elves {
-		elfCalories = append(elfCalories, array.Sum(elf))
+		elfCalories = append(elfCalories, slice.Sum(elf))
 	}
 	return elfCalories
 }

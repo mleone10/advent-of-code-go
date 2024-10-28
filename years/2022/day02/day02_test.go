@@ -3,8 +3,8 @@ package day02_test
 import (
 	"testing"
 
+	"github.com/mleone10/advent-of-code-go/internal/assert"
 	"github.com/mleone10/advent-of-code-go/years/2022/day02"
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/assert"
 )
 
 var tcs = []struct {
@@ -27,14 +27,14 @@ var tcs = []struct {
 func TestSolvePartOne(t *testing.T) {
 	for _, tc := range tcs {
 		d := day02.New(tc.input)
-		assert.Equal(t, d.SolvePartOne(), tc.expectedPartOne)
+		assert.Equals(t, d.SolvePartOne(), tc.expectedPartOne)
 	}
 }
 
 func TestSolvePartTwo(t *testing.T) {
 	for _, tc := range tcs {
 		d := day02.New(tc.input)
-		assert.Equal(t, d.SolvePartTwo(), tc.expectedPartTwo)
+		assert.Equals(t, d.SolvePartTwo(), tc.expectedPartTwo)
 	}
 }
 

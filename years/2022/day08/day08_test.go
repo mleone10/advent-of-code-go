@@ -4,10 +4,11 @@ import (
 	_ "embed"
 	"testing"
 
+	"github.com/mleone10/advent-of-code-go/internal/assert"
 	"github.com/mleone10/advent-of-code-go/internal/mp"
+	"github.com/mleone10/advent-of-code-go/internal/mth"
+	"github.com/mleone10/advent-of-code-go/internal/slice"
 	"github.com/mleone10/advent-of-code-go/years/2022/day08"
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/array"
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/assert"
 )
 
 //go:embed test_input.txt
@@ -35,30 +36,30 @@ var tcs = []struct {
 
 func TestNewGrid(t *testing.T) {
 	g := day08.NewGrid(testInput)
-	assert.Equal(t, g.Get(0, 0), 3)
-	assert.Equal(t, g.Get(1, 1), 5)
-	assert.Equal(t, g.Get(2, 2), 3)
-	assert.Equal(t, g.Get(4, 3), 9)
+	assert.Equals(t, g.Get(0, 0), 3)
+	assert.Equals(t, g.Get(1, 1), 5)
+	assert.Equals(t, g.Get(2, 2), 3)
+	assert.Equals(t, g.Get(4, 3), 9)
 }
 
 func TestHidden(t *testing.T) {
 	g := day08.NewGrid(testInput)
 	// Outer edge is always visible
-	assert.Equal(t, day08.IsVisible(g, 0, 0), true)
-	assert.Equal(t, day08.IsVisible(g, 3, 4), true)
-	assert.Equal(t, day08.IsVisible(g, 4, 4), true)
+	assert.Equals(t, day08.IsVisible(g, 0, 0), true)
+	assert.Equals(t, day08.IsVisible(g, 3, 4), true)
+	assert.Equals(t, day08.IsVisible(g, 4, 4), true)
 
-	assert.Equal(t, day08.IsVisible(g, 1, 1), true)
-	assert.Equal(t, day08.IsVisible(g, 2, 1), true)
-	assert.Equal(t, day08.IsVisible(g, 3, 1), false)
+	assert.Equals(t, day08.IsVisible(g, 1, 1), true)
+	assert.Equals(t, day08.IsVisible(g, 2, 1), true)
+	assert.Equals(t, day08.IsVisible(g, 3, 1), false)
 
-	assert.Equal(t, day08.IsVisible(g, 1, 2), true)
-	assert.Equal(t, day08.IsVisible(g, 2, 2), false)
-	assert.Equal(t, day08.IsVisible(g, 3, 2), true)
+	assert.Equals(t, day08.IsVisible(g, 1, 2), true)
+	assert.Equals(t, day08.IsVisible(g, 2, 2), false)
+	assert.Equals(t, day08.IsVisible(g, 3, 2), true)
 
-	assert.Equal(t, day08.IsVisible(g, 2, 3), true)
-	assert.Equal(t, day08.IsVisible(g, 3, 3), false)
-	assert.Equal(t, day08.IsVisible(g, 1, 3), false)
+	assert.Equals(t, day08.IsVisible(g, 2, 3), true)
+	assert.Equals(t, day08.IsVisible(g, 3, 3), false)
+	assert.Equals(t, day08.IsVisible(g, 1, 3), false)
 }
 
 func TestSolvePartOne(t *testing.T) {
@@ -67,9 +68,9 @@ func TestSolvePartOne(t *testing.T) {
 		g := day08.NewGrid(tc.input)
 		v := 0
 		for i, row := range g.Sparse() {
-			v += len(array.Filter(mp.Keys(row), func(j int) bool { return day08.IsVisible(g, j, i) }))
+			v += len(slice.Filter(mp.Keys(row), func(j int) bool { return day08.IsVisible(g, j, i) }))
 		}
-		assert.Equal(t, v, tc.expectedPartOne)
+		assert.Equals(t, v, tc.expectedPartOne)
 	}
 }
 
@@ -80,9 +81,9 @@ func TestSolvePartTwo(t *testing.T) {
 		v := 0
 		for i, row := range g.Sparse() {
 			for j := range row {
-				v = array.Max([]int{v, day08.ScenicScore(g, j, i)})
+				v = mth.Max([]int{v, day08.ScenicScore(g, j, i)}...)
 			}
 		}
-		assert.Equal(t, v, tc.expectedPartTwo)
+		assert.Equals(t, v, tc.expectedPartTwo)
 	}
 }

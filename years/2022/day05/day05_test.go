@@ -5,9 +5,9 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/mleone10/advent-of-code-go/internal/assert"
 	"github.com/mleone10/advent-of-code-go/internal/stack"
 	"github.com/mleone10/advent-of-code-go/years/2022/day05"
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/assert"
 )
 
 //go:embed test_input.txt
@@ -59,16 +59,16 @@ func TestApplyMove(t *testing.T) {
 
 	d.ApplyMove(m, false)
 
-	assert.Equal(t, d[0].Len(), 2)
-	assert.Equal(t, d[0].Peek(), "2")
-	assert.Equal(t, d[1].Len(), 2)
-	assert.Equal(t, d[1].Peek(), "3")
+	assert.Equals(t, d[0].Len(), 2)
+	assert.Equals(t, d[0].Peek(), "2")
+	assert.Equals(t, d[1].Len(), 2)
+	assert.Equals(t, d[1].Peek(), "3")
 
 	d.ApplyMove(m, true)
 
-	assert.Equal(t, d[0].Len(), 0)
-	assert.Equal(t, d[1].Len(), 4)
-	assert.Equal(t, d[1].Peek(), "2")
+	assert.Equals(t, d[0].Len(), 0)
+	assert.Equals(t, d[1].Len(), 4)
+	assert.Equals(t, d[1].Peek(), "2")
 }
 
 func TestSolvePartOne(t *testing.T) {
@@ -78,7 +78,7 @@ func TestSolvePartOne(t *testing.T) {
 			m := day05.NewMove(move)
 			s.ApplyMove(m, false)
 		}
-		assert.Equal(t, s.GetTopString(), tc.expectedPartOne)
+		assert.Equals(t, s.GetTopString(), tc.expectedPartOne)
 	}
 }
 
@@ -89,6 +89,6 @@ func TestSolvePartTwo(t *testing.T) {
 			m := day05.NewMove(move)
 			s.ApplyMove(m, true)
 		}
-		assert.Equal(t, s.GetTopString(), tc.expectedPartTwo)
+		assert.Equals(t, s.GetTopString(), tc.expectedPartTwo)
 	}
 }

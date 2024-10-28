@@ -5,8 +5,8 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/mleone10/advent-of-code-go/internal/assert"
 	"github.com/mleone10/advent-of-code-go/years/2022/day09"
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/assert"
 )
 
 //go:embed test_input.txt
@@ -37,40 +37,40 @@ var tcs = []struct {
 
 func TestNewRope(t *testing.T) {
 	r := day09.NewRope(3)
-	assert.Equal(t, r.Length(), 3)
+	assert.Equals(t, r.Length(), 3)
 }
 
 func TestMoveN(t *testing.T) {
 	r := day09.NewRope(2)
 	day09.MoveN(r, day09.Cmds["D"], 2)
-	assert.Equal(t, r.Head().Value().Pos.X, 0)
-	assert.Equal(t, r.Head().Value().Pos.Y, 2)
-	assert.Equal(t, r.Tail().Value().Pos.X, 0)
-	assert.Equal(t, r.Tail().Value().Pos.Y, 1)
+	assert.Equals(t, r.Head().Value().Pos.X, 0)
+	assert.Equals(t, r.Head().Value().Pos.Y, 2)
+	assert.Equals(t, r.Tail().Value().Pos.X, 0)
+	assert.Equals(t, r.Tail().Value().Pos.Y, 1)
 
 	day09.MoveN(r, day09.Cmds["R"], 2)
-	assert.Equal(t, r.Head().Value().Pos.X, 2)
-	assert.Equal(t, r.Head().Value().Pos.Y, 2)
-	assert.Equal(t, r.Tail().Value().Pos.X, 1)
-	assert.Equal(t, r.Tail().Value().Pos.Y, 2)
+	assert.Equals(t, r.Head().Value().Pos.X, 2)
+	assert.Equals(t, r.Head().Value().Pos.Y, 2)
+	assert.Equals(t, r.Tail().Value().Pos.X, 1)
+	assert.Equals(t, r.Tail().Value().Pos.Y, 2)
 
 	day09.MoveN(r, day09.Cmds["U"], 3)
-	assert.Equal(t, r.Head().Value().Pos.X, 2)
-	assert.Equal(t, r.Head().Value().Pos.Y, -1)
-	assert.Equal(t, r.Tail().Value().Pos.X, 2)
-	assert.Equal(t, r.Tail().Value().Pos.Y, 0)
+	assert.Equals(t, r.Head().Value().Pos.X, 2)
+	assert.Equals(t, r.Head().Value().Pos.Y, -1)
+	assert.Equals(t, r.Tail().Value().Pos.X, 2)
+	assert.Equals(t, r.Tail().Value().Pos.Y, 0)
 
 	day09.MoveN(r, day09.Cmds["L"], 3)
-	assert.Equal(t, r.Head().Value().Pos.X, -1)
-	assert.Equal(t, r.Head().Value().Pos.Y, -1)
-	assert.Equal(t, r.Tail().Value().Pos.X, 0)
-	assert.Equal(t, r.Tail().Value().Pos.Y, -1)
+	assert.Equals(t, r.Head().Value().Pos.X, -1)
+	assert.Equals(t, r.Head().Value().Pos.Y, -1)
+	assert.Equals(t, r.Tail().Value().Pos.X, 0)
+	assert.Equals(t, r.Tail().Value().Pos.Y, -1)
 
 	day09.MoveN(r, day09.Cmds["L"], 1)
-	assert.Equal(t, r.Head().Value().Pos.X, -2)
-	assert.Equal(t, r.Head().Value().Pos.Y, -1)
-	assert.Equal(t, r.Tail().Value().Pos.X, -1)
-	assert.Equal(t, r.Tail().Value().Pos.Y, -1)
+	assert.Equals(t, r.Head().Value().Pos.X, -2)
+	assert.Equals(t, r.Head().Value().Pos.Y, -1)
+	assert.Equals(t, r.Tail().Value().Pos.X, -1)
+	assert.Equals(t, r.Tail().Value().Pos.Y, -1)
 }
 
 func TestHeadMovesDiagonal(t *testing.T) {
@@ -78,28 +78,28 @@ func TestHeadMovesDiagonal(t *testing.T) {
 	day09.MoveN(r, day09.Cmds["R"], 1)
 	day09.MoveN(r, day09.Cmds["D"], 1)
 	day09.MoveN(r, day09.Cmds["R"], 1)
-	assert.Equal(t, r.Tail().Value().Pos.X, 1)
-	assert.Equal(t, r.Tail().Value().Pos.Y, 1)
+	assert.Equals(t, r.Tail().Value().Pos.X, 1)
+	assert.Equals(t, r.Tail().Value().Pos.Y, 1)
 }
 
 func TestSolvePartOne(t *testing.T) {
 	for _, tc := range tcs {
 		r := day09.NewRope(2)
 		day09.SimulateMoves(r, strings.Split(strings.TrimSpace(tc.input), "\n"))
-		assert.Equal(t, len(r.Tail().Value().Visited()), tc.expectedPartOne)
+		assert.Equals(t, len(r.Tail().Value().Visited()), tc.expectedPartOne)
 	}
 }
 
 func TestSolvePartTwoLongerTest(t *testing.T) {
 	r := day09.NewRope(10)
 	day09.SimulateMoves(r, strings.Split(strings.TrimSpace(testInput2), "\n"))
-	assert.Equal(t, len(r.Tail().Value().Visited()), 36)
+	assert.Equals(t, len(r.Tail().Value().Visited()), 36)
 }
 
 func TestSolvePartTwo(t *testing.T) {
 	for _, tc := range tcs {
 		r := day09.NewRope(10)
 		day09.SimulateMoves(r, strings.Split(strings.TrimSpace(tc.input), "\n"))
-		assert.Equal(t, len(r.Tail().Value().Visited()), tc.expectedPartTwo)
+		assert.Equals(t, len(r.Tail().Value().Visited()), tc.expectedPartTwo)
 	}
 }

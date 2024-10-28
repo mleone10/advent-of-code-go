@@ -4,8 +4,8 @@ import (
 	_ "embed"
 	"testing"
 
+	"github.com/mleone10/advent-of-code-go/internal/assert"
 	"github.com/mleone10/advent-of-code-go/years/2022/day06"
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/assert"
 )
 
 //go:embed input.txt
@@ -50,12 +50,12 @@ var tcs = []struct {
 
 func TestSolvePartOne(t *testing.T) {
 	for _, tc := range tcs {
-		assert.Equal(t, day06.FindStartOfPacket(tc.input), tc.expectedPartOne)
+		assert.Equals(t, day06.FindStartOfPacket(tc.input), tc.expectedPartOne)
 	}
 }
 
 func TestSolvePartTwo(t *testing.T) {
 	for _, tc := range tcs {
-		assert.Equal(t, day06.FindStartOfMessage(tc.input), tc.expectedPartTwo)
+		assert.Equals(t, day06.FindStartOfMessage(tc.input), tc.expectedPartTwo)
 	}
 }

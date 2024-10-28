@@ -68,3 +68,22 @@ func TestReverse(t *testing.T) {
 
 	assert.ArrayEquals(t, []int{5, 4, 3, 2, 1}, actual)
 }
+
+func TestTake(t *testing.T) {
+	assert.ArrayEquals(t, slice.Take([]int{1, 2, 3, 4, 5}, 3), []int{1, 2, 3})
+	assert.ArrayEquals(t, slice.Take([]int{1, 2, 3}, 3), []int{1, 2, 3})
+	assert.ArrayEquals(t, slice.Take([]int{1, 2}, 3), []int{1, 2})
+	assert.ArrayEquals(t, slice.Take([]string{"foo", "bar", "fizz", "buzz"}, 3), []string{"foo", "bar", "fizz"})
+}
+
+func TestFrequencyList(t *testing.T) {
+	testIntFreqs := slice.FrequencyList([]int{5, 5, 10, 10, 10, 15})
+	assert.Equals(t, testIntFreqs[5], 2)
+	assert.Equals(t, testIntFreqs[10], 3)
+	assert.Equals(t, testIntFreqs[15], 1)
+
+	testFloatFreqs := slice.FrequencyList([]float32{1.1, 1.1, 2.2, 2.2, 2.2, 3.3})
+	assert.Equals(t, testFloatFreqs[1.1], 2)
+	assert.Equals(t, testFloatFreqs[2.2], 3)
+	assert.Equals(t, testFloatFreqs[3.3], 1)
+}

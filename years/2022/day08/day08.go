@@ -4,7 +4,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/mleone10/advent-of-code-go/years/2022/pkg/array"
+	"github.com/mleone10/advent-of-code-go/internal/mth"
+	"github.com/mleone10/advent-of-code-go/internal/slice"
 	"github.com/mleone10/advent-of-code-go/years/2022/pkg/grid"
 )
 
@@ -44,22 +45,22 @@ func IsVisible(g grid.Plane[int], x, y int) bool {
 		// Point is the edge of the map, thus is visible
 		return true
 	}
-	return isVisibleThroughTrees(array.Reverse(northTreeHeights(g, x, y)))(g, x, y) ||
+	return isVisibleThroughTrees(slice.Reverse(northTreeHeights(g, x, y)))(g, x, y) ||
 		isVisibleThroughTrees(southTreeHeights(g, x, y))(g, x, y) ||
-		isVisibleThroughTrees(array.Reverse(westTreeHeights(g, x, y)))(g, x, y) ||
+		isVisibleThroughTrees(slice.Reverse(westTreeHeights(g, x, y)))(g, x, y) ||
 		isVisibleThroughTrees(eastTreeHeights(g, x, y))(g, x, y)
 }
 
 func isVisibleThroughTrees(trees []int) func(g grid.Plane[int], x, y int) bool {
 	return func(g grid.Plane[int], x, y int) bool {
-		return array.Max(trees) < g.Get(x, y)
+		return mth.Max(trees...) < g.Get(x, y)
 	}
 }
 
 func ScenicScore(g grid.Plane[int], x, y int) int {
-	return directionalScenicScore(array.Reverse(northTreeHeights(g, x, y)))(g, x, y) *
+	return directionalScenicScore(slice.Reverse(northTreeHeights(g, x, y)))(g, x, y) *
 		directionalScenicScore(southTreeHeights(g, x, y))(g, x, y) *
-		directionalScenicScore(array.Reverse(westTreeHeights(g, x, y)))(g, x, y) *
+		directionalScenicScore(slice.Reverse(westTreeHeights(g, x, y)))(g, x, y) *
 		directionalScenicScore(eastTreeHeights(g, x, y))(g, x, y)
 }
 
