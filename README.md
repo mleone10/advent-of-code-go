@@ -25,5 +25,12 @@ The included `Makefile` can be used to quickly execute all puzzle tests.
 $ make
 ```
 
+A specific year or day can be tested by manually invoking the Go CLI.
+
+```
+$ go test ./years/2020/...
+$ go test ./years/2020/day16/...
+```
+
 # Background
 This repo consolidates my previous Advent of Code projects into a single location.  This is being done both to reduce repo-sprawl and to encourage increased investment in a single utility library.
