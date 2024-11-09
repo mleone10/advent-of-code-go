@@ -1,5 +1,7 @@
 package geo
 
+import "fmt"
+
 type NeighborMode int
 
 const (
@@ -9,11 +11,26 @@ const (
 	NeighborModeFull
 )
 
-func Neighbors1D(l Location, m NeighborMode) []Location {
+func Neighbors(l Location, m NeighborMode, d Dimension) []Location {
+	switch d {
+	case D1:
+		return neighbors1D(l)
+	case D2:
+		return neighbors2D(l, m)
+	case D3:
+		return neighbors3D(l, m)
+	case D4:
+		return neighbors4D(l, m)
+	default:
+		panic(fmt.Sprintf("invalid dimension provided to geo.Neighbors: %v", d))
+	}
+}
+
+func neighbors1D(l Location) []Location {
 	return []Location{{A: l.A - 1}, {A: l.A + 1}}
 }
 
-func Neighbors2D(l Location, m NeighborMode) []Location {
+func neighbors2D(l Location, m NeighborMode) []Location {
 	ret := []Location{}
 
 	if m == NeighborModeCardinal {
@@ -41,7 +58,7 @@ func Neighbors2D(l Location, m NeighborMode) []Location {
 	return ret
 }
 
-func Neighbors3D(l Location, m NeighborMode) []Location {
+func neighbors3D(l Location, m NeighborMode) []Location {
 	ret := []Location{}
 
 	if m == NeighborModeCardinal {
@@ -76,8 +93,8 @@ func Neighbors3D(l Location, m NeighborMode) []Location {
 	return ret
 }
 
-// TODO: test geo.Neighbors4D
-func Neighbors4D(l Location, m NeighborMode) []Location {
+// TODO: test geo.neighbors4D
+func neighbors4D(l Location, m NeighborMode) []Location {
 	ret := []Location{}
 
 	if m == NeighborModeCardinal {

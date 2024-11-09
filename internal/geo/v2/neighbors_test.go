@@ -19,7 +19,7 @@ func TestNeighbors1DFull(t *testing.T) {
 func testNeighbors1D(t *testing.T, n geo.NeighborMode) {
 	subj := geo.Location{A: 5}
 
-	actual := geo.Neighbors1D(subj, n)
+	actual := geo.Neighbors(subj, n, geo.D1)
 
 	assert.Equals(t, 2, len(actual))
 	assert.Contains(t, actual, geo.Location{A: 4})
@@ -29,7 +29,7 @@ func testNeighbors1D(t *testing.T, n geo.NeighborMode) {
 func TestNeighbors2DCardinal(t *testing.T) {
 	subj := geo.Location{A: 5, B: 3}
 
-	actual := geo.Neighbors2D(subj, geo.NeighborModeCardinal)
+	actual := geo.Neighbors(subj, geo.NeighborModeCardinal, geo.D2)
 
 	assert.Equals(t, 4, len(actual))
 	assert.Contains(t, actual, geo.Location{A: 4, B: 3})
@@ -41,7 +41,7 @@ func TestNeighbors2DCardinal(t *testing.T) {
 func TestNeighbors2DFull(t *testing.T) {
 	subj := geo.Location{A: 5, B: 3}
 
-	actual := geo.Neighbors2D(subj, geo.NeighborModeFull)
+	actual := geo.Neighbors(subj, geo.NeighborModeFull, geo.D2)
 
 	assert.Equals(t, 8, len(actual))
 	assert.Contains(t, actual, geo.Location{A: 4, B: 3})
@@ -57,7 +57,7 @@ func TestNeighbors2DFull(t *testing.T) {
 func TestNeighbors3DCardinal(t *testing.T) {
 	subj := geo.Location{A: 5, B: 3, C: 1}
 
-	actual := geo.Neighbors3D(subj, geo.NeighborModeCardinal)
+	actual := geo.Neighbors(subj, geo.NeighborModeCardinal, geo.D3)
 
 	assert.Equals(t, 6, len(actual))
 	assert.Contains(t, actual, geo.Location{A: 4, B: 3, C: 1})
@@ -71,7 +71,7 @@ func TestNeighbors3DCardinal(t *testing.T) {
 func TestNeighbors3DFull(t *testing.T) {
 	subj := geo.Location{A: 5, B: 3, C: 1}
 
-	actual := geo.Neighbors3D(subj, geo.NeighborModeFull)
+	actual := geo.Neighbors(subj, geo.NeighborModeFull, geo.D3)
 
 	assert.Equals(t, 26, len(actual))
 	assert.Contains(t, actual, geo.Location{A: 4, B: 3, C: 1})
