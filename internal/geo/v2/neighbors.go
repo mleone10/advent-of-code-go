@@ -1,7 +1,5 @@
 package geo
 
-import "github.com/mleone10/advent-of-code-go/internal/slice"
-
 type NeighborMode int
 
 const (
@@ -12,84 +10,111 @@ const (
 )
 
 func Neighbors1D(l Location, m NeighborMode) []Location {
-	return neighbors(l, neighborVectors1D)
+	return []Location{{A: l.A - 1}, {A: l.A + 1}}
 }
 
 func Neighbors2D(l Location, m NeighborMode) []Location {
+	ret := []Location{}
+
 	if m == NeighborModeCardinal {
-		return neighbors(l, neighborVectors2DCardinal)
+		for i := -1; i <= 1; i++ {
+			if i != 0 {
+				ret = append(ret, Location{A: l.A + i, B: l.B})
+			}
+		}
+		for i := -1; i <= 1; i++ {
+			if i != 0 {
+				ret = append(ret, Location{A: l.A, B: l.B + i})
+			}
+		}
+		return ret
 	}
-	return neighbors(l, neighborVectors2DFull)
+
+	for i := -1; i <= 1; i++ {
+		for j := -1; j <= 1; j++ {
+			if !(i == 0 && j == 0) {
+				ret = append(ret, Location{A: l.A + i, B: l.B + j})
+			}
+		}
+	}
+
+	return ret
 }
 
 func Neighbors3D(l Location, m NeighborMode) []Location {
+	ret := []Location{}
+
 	if m == NeighborModeCardinal {
-		return neighbors(l, neighborVectors3DCardinal)
+		for i := -1; i <= 1; i++ {
+			if i != 0 {
+				ret = append(ret, Location{A: l.A + i, B: l.B, C: l.C})
+			}
+		}
+		for i := -1; i <= 1; i++ {
+			if i != 0 {
+				ret = append(ret, Location{A: l.A, B: l.B + i, C: l.C})
+			}
+		}
+		for i := -1; i <= 1; i++ {
+			if i != 0 {
+				ret = append(ret, Location{A: l.A, B: l.B, C: l.C + i})
+			}
+		}
+		return ret
 	}
-	return neighbors(l, neighborVectors3DFull)
+
+	for i := -1; i <= 1; i++ {
+		for j := -1; j <= 1; j++ {
+			for k := -1; k <= 1; k++ {
+				if !(i == 0 && j == 0 && k == 0) {
+					ret = append(ret, Location{A: l.A + i, B: l.B + j, C: l.C + k})
+				}
+			}
+		}
+	}
+
+	return ret
 }
 
+// TODO: test geo.Neighbors4D
 func Neighbors4D(l Location, m NeighborMode) []Location {
+	ret := []Location{}
+
 	if m == NeighborModeCardinal {
-		return neighbors(l, neighborVectors4DCardinal)
+		for i := -1; i <= 1; i++ {
+			if i != 0 {
+				ret = append(ret, Location{A: l.A + i, B: l.B, C: l.C, D: l.D})
+			}
+		}
+		for i := -1; i <= 1; i++ {
+			if i != 0 {
+				ret = append(ret, Location{A: l.A, B: l.B + i, C: l.C, D: l.D})
+			}
+		}
+		for i := -1; i <= 1; i++ {
+			if i != 0 {
+				ret = append(ret, Location{A: l.A, B: l.B, C: l.C + i, D: l.D})
+			}
+		}
+		for i := -1; i <= 1; i++ {
+			if i != 0 {
+				ret = append(ret, Location{A: l.A, B: l.B, C: l.C, D: l.D + i})
+			}
+		}
+		return ret
 	}
-	return neighbors(l, neighborVectors4DFull)
+
+	for i := -1; i <= 1; i++ {
+		for j := -1; j <= 1; j++ {
+			for k := -1; k <= 1; k++ {
+				for h := -1; h <= 1; h++ {
+					if !(i == 0 && j == 0 && k == 0 && h == 0) {
+						ret = append(ret, Location{A: l.A + i, B: l.B + j, C: l.C + k, D: l.D + h})
+					}
+				}
+			}
+		}
+	}
+
+	return ret
 }
-
-func neighbors(l Location, v []Location) []Location {
-	return slice.Map(v, func(vec Location) Location {
-		return LocSum(vec, l)
-	})
-}
-
-var neighborVectors1D = []Location{
-	{A: 1},
-	{A: -1},
-}
-
-var neighborVectors2DCardinal = append(neighborVectors1D, []Location{
-	{B: 1},
-	{B: -1},
-}...)
-
-var neighborVectors2DFull = append(neighborVectors2DCardinal, []Location{
-	{A: 1, B: 1},
-	{A: 1, B: -1},
-	{A: -1, B: 1},
-	{A: -1, B: -1},
-}...)
-
-var neighborVectors3DCardinal = append(neighborVectors2DCardinal, []Location{
-	{C: -1},
-	{C: 1},
-}...)
-
-var neighborVectors3DFull = append(neighborVectors2DFull, []Location{
-	{A: 1, B: 1, C: 1},
-	{A: 1, B: 1, C: -1},
-	{A: 1, B: -1, C: 1},
-	{A: 1, B: -1, C: -1},
-	{A: -1, B: 1, C: 1},
-	{A: -1, B: 1, C: -1},
-	{A: -1, B: -1, C: 1},
-	{A: -1, B: -1, C: -1},
-
-	{B: 1, C: 1},
-	{B: 1, C: -1},
-	{B: -1, C: 1},
-	{B: -1, C: -1},
-
-	{A: 1, C: 1},
-	{A: 1, C: -1},
-	{A: -1, C: 1},
-	{A: -1, C: -1},
-
-	{C: 1},
-	{C: -1},
-}...)
-
-// TODO: populate 4D cardinal neighbor vectors slice
-var neighborVectors4DCardinal = append(neighborVectors3DCardinal, []Location{}...)
-
-// TODO: populate 4D full neighbor vectors slice
-var neighborVectors4DFull = append(neighborVectors3DFull, []Location{}...)

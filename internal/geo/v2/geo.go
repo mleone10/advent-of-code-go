@@ -16,9 +16,9 @@ const (
 )
 
 type (
-	mapFunc[T, V comparable]        func(p Point[T]) Point[V]
-	filterFunc[T comparable]        func(p Point[T]) bool
-	reduceFunc[T comparable, V any] func(p Point[T], r V) V
+	MapFunc[T, V comparable]        func(p Point[T]) Point[V]
+	FilterFunc[T comparable]        func(p Point[T]) bool
+	ReduceFunc[T comparable, V any] func(p Point[T], r V) V
 )
 
 type Space[T comparable] interface {
@@ -34,7 +34,7 @@ type Point[T any] struct {
 	Val T
 }
 
-func mapSpace[T, V comparable, S Space[T], R Space[V]](s S, r R, f mapFunc[T, V]) R {
+func mapSpace[T, V comparable, S Space[T], R Space[V]](s S, r R, f MapFunc[T, V]) R {
 	for p := range s.Iter() {
 		v := f(p)
 		r.Set(v.Loc, v.Val)
@@ -42,27 +42,27 @@ func mapSpace[T, V comparable, S Space[T], R Space[V]](s S, r R, f mapFunc[T, V]
 	return r
 }
 
-func Map1D[T, V comparable](s Space1D[T], f mapFunc[T, V]) Space1D[V] {
+func Map1D[T, V comparable](s Space1D[T], f MapFunc[T, V]) Space1D[V] {
 	ret := Space1D[V]{}
 	return mapSpace(s, ret, f)
 }
 
-func Map2D[T, V comparable](s Space2D[T], f mapFunc[T, V]) Space2D[V] {
+func Map2D[T, V comparable](s Space2D[T], f MapFunc[T, V]) Space2D[V] {
 	ret := Space2D[V]{}
 	return mapSpace(s, ret, f)
 }
 
-func Map3D[T, V comparable](s Space3D[T], f mapFunc[T, V]) Space3D[V] {
+func Map3D[T, V comparable](s Space3D[T], f MapFunc[T, V]) Space3D[V] {
 	ret := Space3D[V]{}
 	return mapSpace(s, ret, f)
 }
 
-func Map4D[T, V comparable](s Space4D[T], f mapFunc[T, V]) Space4D[V] {
+func Map4D[T, V comparable](s Space4D[T], f MapFunc[T, V]) Space4D[V] {
 	ret := Space4D[V]{}
 	return mapSpace(s, ret, f)
 }
 
-func filterSpace[T comparable, S Space[T]](s S, r S, f filterFunc[T]) S {
+func filterSpace[T comparable, S Space[T]](s S, r S, f FilterFunc[T]) S {
 	for p := range s.Iter() {
 		if f(p) {
 			r.Set(p.Loc, p.Val)
@@ -71,27 +71,27 @@ func filterSpace[T comparable, S Space[T]](s S, r S, f filterFunc[T]) S {
 	return r
 }
 
-func Filter1D[T comparable](s Space1D[T], f filterFunc[T]) Space1D[T] {
+func Filter1D[T comparable](s Space1D[T], f FilterFunc[T]) Space1D[T] {
 	ret := Space1D[T]{}
 	return filterSpace(s, ret, f)
 }
 
-func Filter2D[T comparable](s Space2D[T], f filterFunc[T]) Space2D[T] {
+func Filter2D[T comparable](s Space2D[T], f FilterFunc[T]) Space2D[T] {
 	ret := Space2D[T]{}
 	return filterSpace(s, ret, f)
 }
 
-func Filter3D[T comparable](s Space3D[T], f filterFunc[T]) Space3D[T] {
+func Filter3D[T comparable](s Space3D[T], f FilterFunc[T]) Space3D[T] {
 	ret := Space3D[T]{}
 	return filterSpace(s, ret, f)
 }
 
-func Filter4D[T comparable](s Space4D[T], f filterFunc[T]) Space4D[T] {
+func Filter4D[T comparable](s Space4D[T], f FilterFunc[T]) Space4D[T] {
 	ret := Space4D[T]{}
 	return filterSpace(s, ret, f)
 }
 
-func Reduce[T comparable, V any, S Space[T]](s S, acc V, f reduceFunc[T, V]) V {
+func Reduce[T comparable, V any, S Space[T]](s S, acc V, f ReduceFunc[T, V]) V {
 	for p := range s.Iter() {
 		acc = f(p, acc)
 	}
@@ -217,7 +217,7 @@ func (s Space3D[T]) Size() int {
 
 // TODO: implement Space3D.String()
 func (s Space3D[T]) String() string {
-	return ""
+	return s[0].String()
 }
 
 func (s Space3D[T]) Iter() iter.Seq[Point[T]] {
