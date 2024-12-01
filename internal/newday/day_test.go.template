@@ -15,8 +15,27 @@ var tcs = []struct {
 	input           string
 	expectedPartOne int
 	expectedPartTwo int
-}{}
+}{
+	{
+		testInput,
+		0,
+		0,
+	},
+	{
+		input,
+		0,
+		0,
+	},
+}
 
-func TestSolvePartOne(t *testing.T) {}
+func TestSolvePartOne(t *testing.T) {
+	for _, tc := range tcs {
 
-func TestSolvePartTwo(t *testing.T) {}
+	}
+}
+
+func TestSolvePartTwo(t *testing.T) {
+	for _, tc := range tcs {
+
+	}
+}
