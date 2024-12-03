@@ -28,7 +28,7 @@ var tcs = []struct {
 	{
 		input,
 		213,
-		0,
+		285,
 	},
 }
 
