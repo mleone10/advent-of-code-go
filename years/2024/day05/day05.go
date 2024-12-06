@@ -1,7 +1,6 @@
 package day05
 
 import (
-	"sort"
 	"strings"
 
 	"github.com/mleone10/advent-of-code-go/internal/mth"
@@ -45,10 +44,6 @@ func NewPages(in string, rs Rules) []Page {
 
 func (p Page) GetMiddlePage() int {
 	return p.ns[len(p.ns)/2]
-}
-
-func (p Page) Repair() {
-	sort.Sort(p)
 }
 
 func (p Page) Len() int {

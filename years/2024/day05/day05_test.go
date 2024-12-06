@@ -59,7 +59,7 @@ func TestSolvePartTwo(t *testing.T) {
 			slice.Filter(ps, func(p day05.Page) bool {
 				return !sort.IsSorted(p)
 			}), 0, func(p day05.Page, ret int) int {
-				p.Repair()
+				sort.Sort(p)
 				return ret + p.GetMiddlePage()
 			})
 
